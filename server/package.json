@@ -1,26 +1,25 @@
 {
-  "name": "nv-webblog",
+  "name": "nv-webblog-server",
   "version": "1.0.0",
-  "description": "NodeJs + VueJs for webblog (Backend)",
+  "description": "nodejs vuejs webblog server (back end)",
   "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Nattapon Kumyaito",
+  "author": "Wasana Ketchawana",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
-    "bluebird": "^3.7.2",
-    "body-parser": "^1.19.0",
+    "bluebird": "^3.5.3",
+    "body-parser": "^1.18.3",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "joi": "17.4.2",
-    "jsonwebtoken": "^8.5.1",
+    "express": "^4.16.4",
+    "joi": "^13.7.0",
+    "jsonwebtoken": "^8.4.0",
     "multer": "^1.4.3",
-    "nodemon": "^2.0.12",
-    "passport": "^0.4.1",
+    "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "sequelize": "^6.6.5",
-    "sqlite3": "^5.0.2"
+    "sequelize": "^4.43.0",
+    "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master"
   }
 }

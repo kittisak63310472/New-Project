@@ -1,0 +1,74 @@
+<template>
+  <div>
+    <head>
+      <title>Bootstrap Example</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+          <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+    
+
+    </head>
+    <div class="container">
+      <ul class="btn-group btn-group-justified">
+      <router-link :to="{ name: 'blogs' }" class="btn btn-primary" > Home </router-link>
+      <router-link :to="{ name: 'comments' }" class="btn btn-primary"> Add Product</router-link>
+        <router-link :to="{ name: 'users' }" class="btn btn-primary"> Users </router-link>
+        <router-link :to="{ name: 'login' }" class="btn btn-primary"> Login </router-link>
+        <a v-on:click.prevent="logout" href="blogs" class="btn btn-primary"> Logout </a>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+export default {
+  methods:{
+    logout () {
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
+      this.$router.push({
+         name: 'login'
+      })
+    }
+  }
+}
+</script>
+
+<style scoped>
+.nv-navbar {
+  background-color: #DCDCDC;
+  width: 100%;
+  padding: 10px 0px 10px 0px;
+}
+.nv-navbar .nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  float: left;
+}
+.nv-navbar .nav li {
+  float: left;
+}
+.nv-navbar .nav li a {
+  padding: 10px;
+  text-decoration: none;
+  color: #778890;
+  font-weight: bold;
+}
+.nv-navbar .nav li a:hover {
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+}
+.nv-navbar .nav li a.router-link-active {
+  background-color: #708090;
+  color: black;
+}
+.clearfix {
+  clear: left;
+}
+</style>

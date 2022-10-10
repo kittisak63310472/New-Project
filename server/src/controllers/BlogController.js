@@ -1,19 +1,18 @@
 const { Blog } = require('../models')
+
 module.exports = {
-    // get all blog
     async index(req, res) {
         try {
             const blogs = await Blog.findAll()
             res.send(blogs)
-        } catch (err) {
+        }catch (err) {
             res.status(500).send({
                 error: 'The blogs information was incorrect'
             })
         }
     },
-    // create blog
+
     async create(req, res) {
-        console.log(JSON.stringify(req.body))
         try {
             const blog = await Blog.create(req.body)
             res.send(blog.toJSON())
@@ -23,7 +22,7 @@ module.exports = {
             })
         }
     },
-    // edit blog, suspend, active
+
     async put(req, res) {
         try {
             await Blog.update(req.body, {
@@ -38,20 +37,21 @@ module.exports = {
             })
         }
     },
-    
-// delete blog
-async remove(req, res) {
+
+    async remove(req, res) {
         try {
             const blog = await Blog.findOne({
                 where: {
                     id: req.params.blogId
                 }
             })
+
             if (!blog) {
                 return res.status(403).send({
                     error: 'The blog information was incorrect'
                 })
             }
+
             await blog.destroy()
             res.send(blog)
         } catch (err) {
@@ -60,16 +60,17 @@ async remove(req, res) {
             })
         }
     },
-    // get blog by id
+
     async show(req, res) {
         try {
             const blog = await Blog.findByPk(req.params.blogId)
             res.send(blog)
-        } catch (err) {
+        }catch (err) {
             console.log(err)
             res.status(500).send({
                 error: 'The blog information was incorrect'
             })
         }
     }
+    
 }

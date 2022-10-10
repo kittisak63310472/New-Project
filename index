@@ -1,0 +1,114 @@
+<template>
+    
+<head>
+
+
+</head>
+<body>
+
+    <div class="col-sm-9">
+      <h4><small>RECENT POSTS</small></h4>
+      <hr>
+      <h2>I Love Food</h2>
+      <h5><span class="glyphicon glyphicon-time"></span> Post by Jane Dane, Sep 27, 2015.</h5>
+      <h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5><br>
+      <p>Food is my passion. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <br><br>
+      
+      <h4><small>RECENT POSTS</small></h4>
+      <hr>
+      <h2>Officially Blogging</h2>
+      <h5><span class="glyphicon glyphicon-time"></span> Post by John Doe, Sep 24, 2015.</h5>
+      <h5><span class="label label-success">Lorem</span></h5><br>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <hr>
+    </div>
+
+</body>
+</template>
+
+<script>
+import UsersService from '@/services/UsersService'
+
+export default {
+    data(){
+        return {
+            users:[]
+        }
+    },
+
+    async created() {
+        try {
+            this.users = (await UsersService.index()).data;
+        }catch (error) {
+            console.log(error);
+        }
+    },
+
+    methods:{
+        navigateTo(route){
+            this.$router.push(route)
+        },
+
+        async deleteUser(user){
+            let result = confirm("Want to delete")
+            if(result){
+                try{
+                    await UsersService.delete(user)
+                    this.refreshData()
+                }catch(error){
+                    console.log(error)
+                }
+            }
+        },
+
+        async refreshData () {
+            this.users = (await UsersService.index()).data
+        },
+
+        logout(){
+            this.$store.dispatch('setToken',null)
+            this.$store.dispatch('setUser',null)
+            this.$router.push({
+                name: 'login'
+            })
+        }
+    },
+};
+</script>
+
+
+<style scoped>
+.nv-navbar {
+  background-color: #DCDCDC;
+  width: 100%;
+  padding: 10px 0px 10px 0px;
+}
+.nv-navbar .nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  float: left;
+}
+.nv-navbar .nav li {
+  float: left;
+}
+.nv-navbar .nav li a {
+  padding: 10px;
+  text-decoration: none;
+  color: #778890;
+  font-weight: bold;
+}
+.nv-navbar .nav li a:hover {
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+}
+.nv-navbar .nav li a.router-link-active {
+  background-color: #708090;
+  color: black;
+}
+.clearfix {
+  clear: left;
+}
+</style>
